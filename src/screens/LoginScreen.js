@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet, Text} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import Button from '../components/Button';
-import Input from '../components/input/index';
-import {colors, images} from '../constants';
+import CheckBox from '../components/CheckBox';
+import Input from '../components/Input';
+import {colors, fonts, images} from '../constants';
 
 export default function LoginScreen() {
   const [pageData, setPageData] = useState({
@@ -16,21 +17,28 @@ export default function LoginScreen() {
     setPageData(page => ({...page, [key]: value}));
   };
 
+  const [rememberMe, setrememberMe] = useState(false);
+
+  const handleRememberMe = () => {
+    void setrememberMe(remember => !remember);
+  };
   return (
-    <ScrollView style={{backgroundColor: colors.white}}>
-      <View style={{backgroundColor: colors.backgroundColor}}>
-        <Image
-          source={images.login}
-          style={{width: 200, height: 100, alignSelf: 'center'}}
-          resizeMethod="scale"
-          resizeMode="contain"
-        />
-        <Image
-          source={images.login_people}
-          style={{width: 80, height: 60, alignSelf: 'center'}}
-          resizeMethod="scale"
-          resizeMode="contain"
-        />
+    <ScrollView style={styles.conntainer}>
+      <View style={styles.innerContainer}>
+        <View style={styles.logoContainer}>
+          <Image
+            source={images.login}
+            style={styles.logo1}
+            resizeMethod="scale"
+            resizeMode="contain"
+          />
+          <Image
+            source={images.login_people}
+            style={styles.logo2}
+            resizeMethod="scale"
+            resizeMode="contain"
+          />
+        </View>
         <View style={{marginVertical: 15}}>
           <Input
             onChangeText={text => onChangeText('username', text)}
@@ -47,12 +55,21 @@ export default function LoginScreen() {
             value={pageData.password}
             icon={'lock-outline'}
             color={colors.light_blue}
+            isHidden={true}
           />
-          <View style={{marginVertical: 15}}>
-            <Button
-              onPress={() => alert('Giriş Yap Tetiklendi')}
-              text={'Sign In'}
+          <View style={styles.rememberMeContainer}>
+            <CheckBox
+              onChangeState={() => handleRememberMe()}
+              checked={rememberMe}
+              checkedColor={colors.light_grey}
             />
+            <Text style={styles.rememberMeText}>Remember Me</Text>
+            </View>
+            <View >
+              <Button
+                onPress={() => alert('Giriş Yap Tetiklendi')}
+                text={'Sign In'}
+              />
           </View>
         </View>
       </View>
@@ -61,5 +78,35 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
-  conntainer: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  conntainer: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+  innerContainer: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  logo1: {
+    marginTop: 25,
+    width: 180,
+    height: 90,
+    alignSelf: 'center',
+    tintColor: colors.light_pink,
+  },
+  logo2: {
+    marginBottom: 25,
+    width: 100,
+    height: 50,
+    alignSelf: 'center',
+    tintColor: colors.light_blue,
+  },
+  logoContainer: {marginBottom: 25, alignItems: 'center'},
+  rememberMeContainer: {
+    marginVertical: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  rememberMeText: {
+    fontSize: fonts.f12,
+    fontWeight: '500',
+    color: colors.light_grey,
+    marginLeft:5
+  },
 });

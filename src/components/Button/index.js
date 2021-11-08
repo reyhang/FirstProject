@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
   },
   button: {
       width:"100%",
-      color:colors.white,
       justifyContent:"center"
       
   },
@@ -37,6 +36,6 @@ const styles = StyleSheet.create({
       height:15,
       letterSpacing:1.2,
       fontWeight:"600",
-      color:colors.black
+      color:colors.light_grey
   },
 });
