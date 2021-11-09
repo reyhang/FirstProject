@@ -5,15 +5,16 @@ import Button from '../components/Button';
 import CheckBox from '../components/CheckBox';
 import Input from '../components/Input';
 import {colors, fonts, images} from '../constants';
+import DeviceInfo from "react-native-device-info" 
 
 export default function LoginScreen() {
+
   const [pageData, setPageData] = useState({
     username: '',
     password: '',
   });
 
   const onChangeText = (key, value) => {
-    console.log('onchange', key, value);
     setPageData(page => ({...page, [key]: value}));
   };
 
@@ -21,7 +22,11 @@ export default function LoginScreen() {
 
   const handleRememberMe = () => {
     void setrememberMe(remember => !remember);
+
   };
+
+  const versionNumber = DeviceInfo.getVersion();
+
   return (
     <ScrollView style={styles.conntainer}>
       <View style={styles.innerContainer}>
@@ -39,16 +44,16 @@ export default function LoginScreen() {
             resizeMode="contain"
           />
         </View>
-        <View style={{marginVertical: 15}}>
+        <View >
           <Input
             onChangeText={text => onChangeText('username', text)}
             placeHolder="User Name"
             value={pageData.username}
             icon={'mail-outline'}
             color={colors.light_pink}
+            
           />
-        </View>
-        <View style={{marginVertical: 15}}>
+       
           <Input
             onChangeText={text => onChangeText('password', text)}
             placeHolder="Password"
@@ -72,6 +77,10 @@ export default function LoginScreen() {
               />
           </View>
         </View>
+      </View>
+      <View style={styles.versionNumberContainer}>
+        <Text style={styles.versionNumberText}>{versionNumber}</Text> 
+
       </View>
     </ScrollView>
   );
@@ -109,4 +118,15 @@ const styles = StyleSheet.create({
     color: colors.light_grey,
     marginLeft:5
   },
+  versionNumberText: {
+    fontSize: fonts.f12,
+    color:colors.light_grey,
+  },
+  versionNumberContainer:{
+    paddingTop:90,
+    paddingBottom:10,
+    alignItems:"center",
+    width:"100%"
+
+  }
 });

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {View, TextInput, StyleSheet} from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import IconComunity from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -7,15 +7,12 @@ import {colors, fonts} from '../../constants';
 export default function Input({
   onChangeText,
   value = '',
-  isHidden,
   icon,
   placeHolder = '',
-  placeHolderTextColor,
-  style,
   color,
+  isHidden,
 }) {
-
-const [showPass, setshowPass] = useState(false)
+  const [showPass, setshowPass] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -32,6 +29,7 @@ const [showPass, setshowPass] = useState(false)
         placeholderTextColor={colors.light_grey}
         secureTextEntry={isHidden ? !showPass : false}
         style={styles.input}
+        underlineColorAndroid="transparent"
       />
       {isHidden && (
         <IconComunity
@@ -39,7 +37,7 @@ const [showPass, setshowPass] = useState(false)
           style={styles.icon}
           onPress={() => setshowPass(pass => !pass)}
           size={25}
-          color={showPass? colors.light_pink : colors.light_blue}
+          color={showPass ? colors.light_pink : colors.light_blue}
         />
       )}
     </View>
@@ -52,15 +50,19 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#97a1be',
+    marginHorizontal: 17,
   },
   input: {
-    width: 250,
-    marginTop: 3,
+    width: '75%',
     fontSize: fonts.f13,
     letterSpacing: 1,
     fontWeight: '600',
+    marginTop: 3,
   },
-  icon:{
-      alignSelf:"flex-end",marginRight: 10, marginTop: 15
-  }
+
+  icon: {
+    paddingLeft: 23,
+    marginTop: 15,
+    alignSelf: 'flex-end',
+  },
 });

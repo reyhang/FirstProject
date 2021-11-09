@@ -1,14 +1,20 @@
-
 import React from 'react';
-import Navigation from "./src/navigation"
+import {Provider} from 'react-redux';
+import persistStore from 'redux-persist/es/persistStore';
+import {PersistGate} from 'redux-persist/integration/react';
+import Navigation from './src/navigation';
+import store from './src/redux';
 
-
+const persistor = persistStore(store);
 
 function App() {
   return (
-    <Navigation />
+    <PersistGate persistor={persistor}>
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
+    </PersistGate>
   );
 }
-
 
 export default App;
