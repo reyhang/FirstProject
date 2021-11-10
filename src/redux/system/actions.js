@@ -1,9 +1,11 @@
 import {
     TOGGLE_LOADER,
+    SET_USER,
     USER_LOGOUT,
     HIDE_LOADER,
     SET_THEME,
     SET_LANGUAGE,
+
   } from './actionTypes';
 
 
@@ -22,9 +24,20 @@ export function hideLoader(){
 }
 
 //Sistemin temasını set eder.
-export function setTheme(){
+export function setTheme(payload){
     return {
-        type: SET_THEME,payload    }
+        type: SET_THEME,payload 
+    }
 }
 
+export function setUser(payload){
+    return {
+        type:SET_USER,payload
+    }
+}
 
+export function userLogout(payload){
+    return {
+        type:USER_LOGOUT,payload
+    }
+}

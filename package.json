@@ -7,7 +7,10 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "androidClean": "cd android && ./gradlew clean && cd ..",
+    "apk": "cd android && ./gradlew assembleRelease && cd ..",
+    "aab": "cd android && ./gradlew bundleRelease && cd .."
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.11",
@@ -16,10 +19,12 @@
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
     "axios": "^0.24.0",
+    "i18n-js": "^3.8.0",
     "react": "17.0.2",
     "react-native": "0.66.2",
     "react-native-device-info": "^8.4.5",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-localize": "^2.1.5",
     "react-native-reanimated": "^2.2.3",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.9.0",

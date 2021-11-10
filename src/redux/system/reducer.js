@@ -1,5 +1,6 @@
 import {
   TOGGLE_LOADER,
+  SET_USER,
   USER_LOGOUT,
   HIDE_LOADER,
   SET_THEME,
@@ -12,6 +13,7 @@ const initialState = {
   token: '',
   language: 'TR',
   isDarkMode: false,
+  isLogin:false,
 };
 
 export default function systemReducer(state = initialState, action) {
@@ -22,6 +24,9 @@ export default function systemReducer(state = initialState, action) {
     case HIDE_LOADER:
       return {...state, loading: false};
 
+    case SET_USER:
+      return {...state, isLogin:true, userInfo: action.payload}
+
     case USER_LOGOUT:
       return {
         ...state,
@@ -29,6 +34,7 @@ export default function systemReducer(state = initialState, action) {
         token: '',
         language: 'TR',
         loading: false,
+        isLogin:false,
       };
 
     case SET_THEME:

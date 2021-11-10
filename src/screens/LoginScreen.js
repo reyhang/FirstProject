@@ -6,8 +6,20 @@ import CheckBox from '../components/CheckBox';
 import Input from '../components/Input';
 import {colors, fonts, images} from '../constants';
 import DeviceInfo from "react-native-device-info" 
+import { useDispatch, useSelector } from 'react-redux';
+import {hideLoader, setUser, toggleLoader} from "../redux/system/actions"
+import I18n from '../i18n';
 
 export default function LoginScreen() {
+
+  const usernameText = I18n.t("username")
+  const passwordText = I18n.t("password")
+  const rememberMeText = I18n.t("rememberMe")
+  const loginText = I18n.t("login")
+
+
+  const dispatch = useDispatch()
+
 
   const [pageData, setPageData] = useState({
     username: '',
@@ -22,13 +34,24 @@ export default function LoginScreen() {
 
   const handleRememberMe = () => {
     void setrememberMe(remember => !remember);
+  };
 
+  const onLogin = () => {
+    dispatch(toggleLoader());
+
+    dispatch(
+      setUser({
+        name: 'Rg',
+      }),
+    );
+
+    dispatch(hideLoader());
   };
 
   const versionNumber = DeviceInfo.getVersion();
 
   return (
-    <ScrollView style={styles.conntainer}>
+    <ScrollView style={styles.container}>
       <View style={styles.innerContainer}>
         <View style={styles.logoContainer}>
           <Image
@@ -47,7 +70,7 @@ export default function LoginScreen() {
         <View >
           <Input
             onChangeText={text => onChangeText('username', text)}
-            placeHolder="User Name"
+            placeHolder={usernameText}
             value={pageData.username}
             icon={'mail-outline'}
             color={colors.light_pink}
@@ -56,7 +79,7 @@ export default function LoginScreen() {
        
           <Input
             onChangeText={text => onChangeText('password', text)}
-            placeHolder="Password"
+            placeHolder={passwordText}
             value={pageData.password}
             icon={'lock-outline'}
             color={colors.light_blue}
@@ -68,12 +91,12 @@ export default function LoginScreen() {
               checked={rememberMe}
               checkedColor={colors.light_grey}
             />
-            <Text style={styles.rememberMeText}>Remember Me</Text>
+            <Text style={styles.rememberMeText}>{rememberMeText}</Text>
             </View>
             <View >
-              <Button
-                onPress={() => alert('Giriş Yap Tetiklendi')}
-                text={'Sign In'}
+              <Button 
+                text={loginText}
+                onPress={() => onLogin()}
               />
           </View>
         </View>
@@ -87,7 +110,7 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
-  conntainer: {
+  container: {
     flex: 1,
     backgroundColor: colors.white,
   },
