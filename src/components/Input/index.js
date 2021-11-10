@@ -11,6 +11,7 @@ export default function Input({
   placeHolder = '',
   color,
   isHidden,
+  valueColor
 }) {
   const [showPass, setshowPass] = useState(false);
 
@@ -20,16 +21,16 @@ export default function Input({
         name={icon}
         size={20}
         color={color}
-        style={{marginRight: 10, marginTop: 15}}
+        style={{marginRight: 10, marginTop: 17}}
       />
       <TextInput
         onChangeText={onChangeText}
         value={value}
         placeholder={placeHolder}
-        placeholderTextColor={colors.light_grey}
+        placeholderTextColor={colors.gainsboro}
         secureTextEntry={isHidden ? !showPass : false}
         style={styles.input}
-        underlineColorAndroid="transparent"
+        
       />
       {isHidden && (
         <IconComunity
@@ -54,15 +55,17 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '75%',
-    fontSize: fonts.f13,
+    fontSize: fonts.f15,
     letterSpacing: 1,
     fontWeight: '600',
     marginTop: 3,
+    color:colors.dim_grey,
+    alignSelf:"flex-start",
   },
 
   icon: {
     paddingLeft: 23,
-    marginTop: 15,
+    marginTop:10,
     alignSelf: 'flex-end',
   },
 });
