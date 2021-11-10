@@ -1,7 +1,8 @@
 export default {
     white:"white",
     black:"black",
-    light_grey:"#A9A9A9",
+    dim_grey:"#696969",
+    gainsboro:"#DCDCDC",
     light_blue:"#99CCFF",
     cornflow_blue:"#6485ED",
     dark_salmon:"#eda891",
